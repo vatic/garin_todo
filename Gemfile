@@ -65,9 +65,12 @@ group :development do
   gem 'railroady'
 end
 
-#group :test do
+group :test, :development do
   gem 'rspec-rails'
-#end
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+end
 
 
 
