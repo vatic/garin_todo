@@ -13,6 +13,11 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 #gem 'coffee-rails', '~> 4.1.0'
 
+#gem 'rb-readline'
+gem 'coolline'
+
+gem "listen", git: 'https://github.com/guard/listen'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'node'
@@ -60,9 +65,9 @@ group :development do
   gem 'railroady'
 end
 
-group :test do
+#group :test do
   gem 'rspec-rails'
-end
+#end
 
 
 
