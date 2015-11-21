@@ -1,11 +1,19 @@
-<tr>
-  <td><%= todo.title %></td>
-  <td><%= todo.deadline_at %></td>
-  <td><%= render 'ui/crud_buttons' %></td>
-</tr>
-<tr>
-  <td>
-    <td><%= render 'form', todo: todo %></td>
-  </td>
-</tr>
+<div class="row">
+  <div class="col-xs-4">
+    <%= todo.title %>
+  </div>
+  <div class="col-xs-4">
+    <%= todo.deadline_at %>
+  </div>
+  <div class="col-xs-4">
+    <%= render 'ui/crud_buttons', todo: todo %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+     <%= render 'form', todo: todo %>
+  </div>
+</div>
+<hr>
+
 

@@ -1,4 +1,4 @@
-<%= simple_form_for todo, url: user_todo_path(current_user.id, todo.id) do |f| %>
+<%= simple_form_for todo, url: user_todo_path(current_user.id, todo.id), html: {class: 'form-inline hidden todo-edit-form'} do |f| %>
     <%= f.input :title %>
     <%= f.input :deadline_at %>
     <%= f.button :submit %>
