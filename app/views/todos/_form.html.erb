@@ -1,7 +1,7 @@
 
-<div class="todo-edit-form-wrapper hidden" id=<%= todo.id %> data-url=<%= user_todo_path(current_user.id, todo.id, format: :json) %>  >
+<div class=<%= html_class %> id=<%= todo.id %> data-url=<%= url %>  >
 
-  <%= simple_form_for todo, remote: true, url: user_todo_path(current_user.id, todo.id, format: :json), html: {class: 'form-horizontal todo-edit-form'} do |f| %>
+  <%= simple_form_for todo, remote: true, url: url, html: {class: 'form-horizontal todo-edit-form'} do |f| %>
       <%= f.input :title %>
       <%= f.input :deadline_at %>
   <% end %>

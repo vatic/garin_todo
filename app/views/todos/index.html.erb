@@ -1,7 +1,12 @@
 <div class="row">
+
   <div class="col-xs-4 col-xs-offset-4">
     <button class=" btn btn-lg btn-block btn-success">New TODO</button>
   </div>
+  <div class="col-xs-12">
+    <% #render 'form', todo: todo, url: user_todos_path(current_user.id, format: :json) %>
+  </div>
+
 </div>
 
 <hr>

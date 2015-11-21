@@ -9,6 +9,10 @@ $( document ).ready(function() {
       $('.todo-edit-form-wrapper#' + todo_id).removeClass('hidden');
     });
 
+    $('.todo-new-button').on('click', function(e) {
+      $('.todo-new-form-wrapper').removeClass('hidden');
+    });
+
     $('.todo-edit-form-cancel-button').on('click', function(e) {
       var todo_id = $(e.target).data('todo_id');
       console.log('click cancel', todo_id);
