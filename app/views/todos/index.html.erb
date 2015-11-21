@@ -1,7 +1,15 @@
 <div class="row">
+  <div class="col-xs-4 col-xs-offset-4">
+    <button class=" btn btn-lg btn-block btn-success">New TODO</button>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
   <div class="col-xs-12">
-    <div class="list-group">
+    <table class="table-bordered table">
       <%= render @todos %>
-    </div>
+    </table>
   </div>
 </div>
