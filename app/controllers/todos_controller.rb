@@ -12,10 +12,10 @@ class TodosController < ApplicationController
   private
 
     def set_todo
-      @user = User.find(params[:id])
+      @todo = Todo.find(params[:id])
     end
 
     def todo_params
-      params.require(:user).permit(:name, :nickname, :email)
+      params.require(:todo).permit(:title, :deadline_at)
     end
 end
