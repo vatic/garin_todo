@@ -16,5 +16,8 @@
 //= require jquery
 //= require bootstrap-sprockets
 
-//= require_tree .
+//= require initializer
+//= require_tree ./config
+//= require_tree ./lib
+//= require todos
 

@@ -1,5 +1,5 @@
 
-<div class="todo-edit-form-wrapper hidden" id=<%= todo.id || 'new-todo' %> data-url=<%= url %>  >
+<div class="todo-edit-form-wrapper collapse" id=<%= todo.id || 'new-todo' %> data-url=<%= url %>  >
 
   <%= simple_form_for todo, remote: true, url: url, html: {class: 'form-horizontal todo-edit-form'} do |f| %>
       <%= f.input :title %>
