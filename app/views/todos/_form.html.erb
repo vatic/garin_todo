@@ -3,7 +3,11 @@
 
   <%= simple_form_for todo, remote: true, url: url, html: {class: 'form-horizontal todo-edit-form'} do |f| %>
       <%= f.input :title %>
-      <%= f.input :deadline_at %>
+      <%= f.input :deadline_at, as: :datetime,
+                              start_year: Date.today.year,
+                              end_year: Date.today.year + 5,
+                              default: 5.minutes.from_now,
+                              order: [:minute, :hour, :day, :month, :year] %>
   <% end %>
 
   <button class="btn btn-danger todo-edit-form-submit-button" data-todo_id=<%= todo.id %> >Update Todo</button>

@@ -42,6 +42,7 @@ var main = function() {
   var _showFlashSuccess = function(e, message) {
     var el = $(_cfg.flashClass);
     el.html(message);
+    el.removeClass('alert-danger');
     el.addClass('alert-success');
     el.show();
   };
@@ -51,6 +52,25 @@ var main = function() {
     el.html(message.responseText);
     el.addClass('alert-danger');
     el.show();
+    console.log('message', message);
+    console.log('title in error', 'title' in message.responseJSON.errors);
+  };
+
+  var _showValidationError = function(e, message, todoId) {
+    console.log('validation todoId', todoId);
+    if (todoId) {
+      if ('title' in message.responseJSON.errors) {
+        $('.todo-edit-form#edit_todo_' + todoId + ' .form-group.todo_title').addClass('has-error')
+      } else if ('deadline_at' in message.responseJSON.errors) {
+        $('.todo-edit-form#edit_todo_' + todoId + ' .form-group.todo_deadline_at').addClass('has-error')
+      }
+    } else {
+      if ('title' in message.responseJSON.errors) {
+        $('.todo-edit-form#new_todo .form-group.todo_title').addClass('has-error')
+      } else if ('deadline_at' in message.responseJSON.errors) {
+        $('.todo-edit-form#new_todo .form-group.todo_deadline_at').addClass('has-error')
+      }
+    }
   };
 
   var _hideFlash = function(e) {
@@ -99,7 +119,13 @@ var main = function() {
       action: 'flash:hide',
       selector: null,
       handler: _hideFlash
+    },
+    {
+      action: 'validation:form:error',
+      selector: null,
+      handler: _showValidationError
     }
+ 
     
   ];
 

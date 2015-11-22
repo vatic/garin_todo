@@ -24,32 +24,48 @@
       return function(data) {
         $(_cfg.todoRowIdPrefix + todoId).remove();
       };
+    },
+
+    updateErrorHandler: function(todoId) {
+      return function(error) {
+        $(document).trigger('flash:error', [error]);
+        $(document).trigger('validation:form:error', [error, todoId]);
+      };
+    },
+
+    createErrorHandler: function(error) {
+      $(document).trigger('flash:error', [error]);
+      $(document).trigger('validation:form:error', [error]);
     }
+
   };
 
   var api = {
 
-    _post: function(url, formData, successHandler) {
+    _post: function(url, formData, successHandler, errorHandler) {
+      console.log('formData', formData);
       $.post(url, formData)
         .done(function(data) {
           successHandler(data);
         })
         .fail(function(error) {
           //console.log('error', error);
-          $(document).trigger('flash:error', [error]);
+          //$(document).trigger('flash:error', [error]);
+          //$(document).trigger('validation:form:error', [error]);
+          errorHandler(error);
         })
     },
 
     updateTodo: function(todoId) {
       var formData = $(_cfg.todoEditFormIdPrefix + todoId).serialize();
       var url = $(_cfg.todoFormWrapperIdPrefix + todoId).data(_cfg.urlDataAttr);
-      this._post(url, formData, responseHandlers.rerenderTodoListRow(todoId));
+      this._post(url, formData, responseHandlers.rerenderTodoListRow(todoId), responseHandlers.updateErrorHandler(todoId));
     },
 
     createTodo: function() {
       var formData = $(_cfg.todoNewFormId).serialize();
       var url = $(_cfg.todoFormWrapperClass + _cfg.todoFormNewId ).data(_cfg.urlDataAttr);
-      this._post(url, formData, responseHandlers.addTodoListRow);
+      this._post(url, formData, responseHandlers.addTodoListRow, responseHandlers.createErrorHandler);
     },
 
     deleteTodo: function(url, todoId) {
