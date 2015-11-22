@@ -4,6 +4,8 @@
 (function() {
 
   var config = {
+    flashClass: '.flash',
+
     todoFormWrapperClass: '.todo-edit-form-wrapper',
     todoFormWrapperIdPrefix: '.todo-edit-form-wrapper#',
     todoEditFormIdPrefix: '#edit_todo_',
@@ -19,7 +21,7 @@
     formCancelClass: '.todo-edit-form-cancel-button',
     formSubmitClass: '.todo-edit-form-submit-button',
     todoIdDataAttr: 'todo_id',
-    urlDataAttr: 'url' 
+    urlDataAttr: 'url'
 
   };
 

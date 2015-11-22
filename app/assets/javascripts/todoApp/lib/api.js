@@ -10,10 +10,14 @@
         $(_cfg.todoTitleIdPrefix + todoId).html(data.title);
         $(_cfg.todoDeadlineIdPrefix + todoId).html(data.deadline_at);
         $(_cfg.todoFormWrapperIdPrefix + todoId).hide();
+        $(document).trigger('flash:success', ['Todo updated with title: ' + data.title]);
       };
     },
+
     addTodoListRow: function(data) {
       $(_cfg.todosListClass).prepend(data.html);
+      $(_cfg.todoFormWrapperClass + _cfg.todoFormNewId).hide();
+      $(document).trigger('flash:success', ['Todo created with title: ' + data.title]);
     },
 
     deleteTodoListRow: function(todoId) {
@@ -31,7 +35,8 @@
           successHandler(data);
         })
         .fail(function(error) {
-          console.log('error', error);
+          //console.log('error', error);
+          $(document).trigger('flash:error', [error]);
         })
     },
 

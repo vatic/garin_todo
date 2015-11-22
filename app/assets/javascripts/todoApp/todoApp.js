@@ -23,7 +23,12 @@ var main = function() {
   };
 
   var _cancelEdit = function(e) {
-    $(_cfg.todoFormWrapperIdPrefix + _todoId(e)).hide();
+    if (_todoId(e)) {
+      $(_cfg.todoFormWrapperIdPrefix + _todoId(e)).hide();
+    } else {
+      $(_cfg.todoFormWrapperClass + _cfg.todoFormNewId).hide();
+    }
+    $(document).trigger('flash:hide');
   };
 
   var _submitForm = function(e) {
@@ -33,6 +38,25 @@ var main = function() {
       _api.createTodo(_todoId(e));
     }
   };
+
+  var _showFlashSuccess = function(e, message) {
+    var el = $(_cfg.flashClass);
+    el.html(message);
+    el.addClass('alert-success');
+    el.show();
+  };
+
+  var _showFlashError = function(e, message) {
+    var el = $(_cfg.flashClass);
+    el.html(message.responseText);
+    el.addClass('alert-danger');
+    el.show();
+  };
+
+  var _hideFlash = function(e) {
+    $(_cfg.flashClass).hide();
+  };
+
 
   var actions = [
 
@@ -60,12 +84,31 @@ var main = function() {
       action: 'click',
       selector: _cfg.formSubmitClass,
       handler: _submitForm
+    },
+    {
+      action: 'flash:success',
+      selector: null,
+      handler: _showFlashSuccess
+    },
+    {
+      action: 'flash:error',
+      selector: null,
+      handler: _showFlashError
+    },
+    {
+      action: 'flash:hide',
+      selector: null,
+      handler: _hideFlash
     }
     
   ];
 
   actions.map(function(a) {
-    $(document).on(a.action, a.selector, a.handler)
+    if (a.selector) {
+      $(document).on(a.action, a.selector, a.handler);
+    } else {
+      $(document).on(a.action, a.handler);
+    }
   }.bind(this));
 
 };
