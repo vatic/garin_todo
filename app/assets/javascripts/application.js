@@ -16,8 +16,9 @@
 //= require jquery
 //= require bootstrap-sprockets
 
-//= require initializer
-//= require_tree ./config
-//= require_tree ./lib
+//= require ./todoApp/initializer
+//= require_tree ./todoApp/config
+//= require_tree ./todoApp/lib
+//= require ./todoApp/todoApp
 //= require todos
 
