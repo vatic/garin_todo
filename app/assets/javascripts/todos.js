@@ -3,7 +3,7 @@ $( document ).ready(function() {
   var todosApp = function() {
     console.log('todos.js loaded...');
 
-    $('.todo-edit-button').on('click', function(e) {
+    $(document).on('click', '.todo-edit-button', function(e) {
       var todo_id = $(e.target).data('todo_id');
       console.log('todo-edit-button click', '.todo-edit-form-wrapper#' + todo_id);
       $('.todo-edit-form-wrapper').addClass('hidden');
@@ -15,7 +15,28 @@ $( document ).ready(function() {
       $('#new-todo').removeClass('hidden');
     });
 
-    $('.todo-edit-form-cancel-button').on('click', function(e) {
+    $(document).on('click', '.todo-delete-button', function(e) {
+      var todo_id = $(e.target).data('todo_id');
+      var url = $(e.target).data('url');
+      var formData = {
+        _method: 'delete'
+      };
+
+      if ( confirm('Are you sure?') ) {
+        $.post(url, formData)
+          .done(function(data) {
+            console.log('data',data);
+            $('#todo_row_' + todo_id).remove();
+
+          })
+          .fail(function(error) {
+            console.log('error', error);
+          })
+      }
+    });
+
+
+    $(document).on('click', '.todo-edit-form-cancel-button', function(e) {
       var todo_id = $(e.target).data('todo_id') || 'new-todo';
       console.log('click cancel', todo_id);
       $('.todo-edit-form-wrapper#' + todo_id).addClass('hidden');
@@ -36,9 +57,13 @@ $( document ).ready(function() {
       $.post(url, formData)
         .done(function(data) {
           console.log('data',data);
-          $('#todo_title_' + todo_id).html(data.title);
-          $('#todo_deadline_at_' + todo_id).html(data.deadline_at);
-          $('.todo-edit-form-wrapper#' + todo_id).addClass('hidden');
+          if (todo_id) {
+            $('#todo_title_' + todo_id).html(data.title);
+            $('#todo_deadline_at_' + todo_id).html(data.deadline_at);
+            $('.todo-edit-form-wrapper#' + todo_id).addClass('hidden');
+          } else {
+            $('.todos-list').append(data.html);
+          }
         })
         .fail(function(error) {
           console.log('error', error);
