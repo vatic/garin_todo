@@ -1,4 +1,4 @@
 <div class="btn-group">
   <button class="btn btn-warning todo-edit-button" data-todo_id=<%= todo.id %>  >Edit</button>
-  <button class="btn btn-danger">Delete</button>
+  <%= link_to 'Destroy', user_todo_path(user,todo), method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-danger" %>
 </div>

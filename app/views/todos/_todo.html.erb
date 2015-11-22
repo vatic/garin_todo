@@ -6,12 +6,12 @@
     <%= todo.deadline_at %>
   </div>
   <div class="col-xs-4">
-    <%= render 'ui/crud_buttons', todo: todo %>
+    <%= render 'ui/crud_buttons', todo: todo, user: current_user %>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-     <%= render 'form', todo: todo, url: user_todo_path(current_user.id, todo.id, format: :json), html_class: "todo-edit-form-wrapper"%>
+     <%= render 'form', todo: todo, url: user_todo_path(current_user.id, todo.id, format: :json) %>
   </div>
 </div>
 <hr>

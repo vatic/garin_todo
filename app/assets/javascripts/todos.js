@@ -16,7 +16,7 @@ $( document ).ready(function() {
     });
 
     $('.todo-edit-form-cancel-button').on('click', function(e) {
-      var todo_id = $(e.target).data('todo_id');
+      var todo_id = $(e.target).data('todo_id') || 'new-todo';
       console.log('click cancel', todo_id);
       $('.todo-edit-form-wrapper#' + todo_id).addClass('hidden');
     });

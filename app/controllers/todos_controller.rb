@@ -1,28 +1,38 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :create, :destroy]
+
+  respond_to :json
 
 
   def index
     @todos = Todo.all
   end
 
-  def show
+
+  # POST /users/:user_id/todos
+  # POST /users/:user_id/todos.json
+  def create
+    @todo = @user.todos.build(todo_params)
+    @todo.save
+    respond_with(@user, @todo)
   end
-  #
+  
   # PATCH/PUT /users/:user_id/todos/1
   # PATCH/PUT /users/:user_id/todos/1.json
   def update
-    respond_to do |format|
-      if @todo.update(todo_params)
-        format.html { redirect_to @todo, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: user_todo_url(@user, @todo)}
-      else
-        format.html { render :edit }
-        format.json { render json: @todo.errors, status: :unprocessable_entity }
-      end
-    end
+    @todo.update(todo_params)
+    respond_with(@user, @todo)
   end
+
+  # DELETE /users/:user_id/todos/1
+  # DELETE /users/:user_id/todos/1.json
+  def destroy
+    @todo.destroy
+    respond_with(@user, @todo)
+  end
+
+
 
   private
 
