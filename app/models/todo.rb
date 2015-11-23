@@ -1,6 +1,8 @@
 class Todo < ActiveRecord::Base
   belongs_to :user
 
+  update_index('todos#todo') { self }
+
   default_scope { order('updated_at DESC') }
 
   validates :title, presence: true

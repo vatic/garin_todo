@@ -26,3 +26,9 @@ body {
 .flash-wrapper .flash{
   height: 50px;
 }
+
+.navbar-form .form-control{
+    display: inline-block;
+    width: 400px; /*This is the issue*/
+    vertical-align: middle;
+}
