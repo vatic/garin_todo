@@ -80,3 +80,6 @@ gem 'simple_form'
 
 # Use elasticsearch with chewy
 gem 'chewy'
+
+gem 'activeadmin', github: 'activeadmin'
+
