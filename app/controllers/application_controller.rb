@@ -6,11 +6,12 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
 
+
   protected
 
-  #def after_sign_out_path_for(resource)
-  #  
-  #end
+  def authenticate_admin_user!
+    redirect_to new_user_session_path unless current_user.try(:admin?)
+  end
 
   def layout_by_resource
     if devise_controller?
