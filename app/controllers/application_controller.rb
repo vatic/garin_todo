@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  #def after_sign_out_path_for(resource)
+  #  
+  #end
+
   def layout_by_resource
     if devise_controller?
       "auth"

@@ -3,7 +3,7 @@
 var simplePubSub = {};
 
 
-function(o) {
+(function(o) {
 
   var _callstack = {};
 
@@ -30,6 +30,6 @@ function(o) {
   }
 
 
-}(simplePubSub);
+})(simplePubSub);
 
 window.simplePubSub = simplePubSub;
