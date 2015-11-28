@@ -1,5 +1,5 @@
 class TodosIndex < Chewy::Index
   define_type Todo do
-    field :title
+    field :title, :done
   end
 end

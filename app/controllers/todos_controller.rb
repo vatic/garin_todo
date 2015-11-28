@@ -8,7 +8,7 @@ class TodosController < ApplicationController
 
   def index
 
-    @todos = Todo.search(params[:search]).page params[:page]
+    @todos = Todo.search(params[:search], params[:done]).page params[:page]
 
   end
 

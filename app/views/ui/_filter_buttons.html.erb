@@ -1,0 +1,5 @@
+
+<%= link_to 'All', user_todos_path(current_user), class: "btn-filter btn btn-lg btn-primary #{params[:done].blank? ? 'active':''}"%>
+<%= link_to 'Done', user_todos_path(current_user, done: true), class: "btn-filter btn btn-lg btn-primary #{params[:done] == 'true' ? 'active':''}" %>
+<%= link_to 'In progress', user_todos_path(current_user, done: false), class: "btn-filter btn btn-lg btn-primary #{params[:done] == 'false' ? 'active':''}" %>
+

@@ -27,10 +27,14 @@ class Todo < ActiveRecord::Base
 
   class << self
 
-    def search(search_string)
+    def search(search_string, done)
       if search_string.blank?
-        Todo.all
-        #TodosIndex.query( match_all: { } ).load
+        #Todo.all
+        if done.blank?
+          TodosIndex.query( query_string: { query: '*'} ).limit(5).load
+        else
+          TodosIndex.query( query_string: { query: '*'} ).filter(term: { done: done}).limit(5).load
+        end
         
       else
         if search_string =~ /\*/
