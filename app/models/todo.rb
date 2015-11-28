@@ -27,7 +27,7 @@ class Todo < ActiveRecord::Base
 
   class << self
 
-    def search(search_string, done)
+    def search(search_string, done = nil)
       if search_string.blank?
         #Todo.all
         if done.blank?
@@ -38,9 +38,17 @@ class Todo < ActiveRecord::Base
         
       else
         if search_string =~ /\*/
-          TodosIndex.query( wildcard: {title: search_string } ).limit(5).load
+          if done.blank?
+            TodosIndex.query( wildcard: {title: search_string } ).limit(5).load
+          else
+            TodosIndex.query( wildcard: {title: search_string } ).filter(term: { done: done }).limit(5).load
+          end
         else
-          TodosIndex.query(query_string: {query: search_string } ).limit(5).load
+          if done.blank?
+            TodosIndex.query(query_string: {query: search_string } ).limit(5).load
+          else
+            TodosIndex.query(query_string: {query: search_string } ).filter(term: { done: done }).limit(5).load
+          end
         end
       end
     end

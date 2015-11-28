@@ -8,7 +8,7 @@ module TodosHelper
 
   def todos_filter_button(title, filter_criteria, button_class = "btn-filter btn btn-lg btn-primary")
     link_to title,
-      user_todos_path(current_user, filter_criteria),
+      user_todos_path(current_user, params.slice(:search).merge(filter_criteria)),
       class:  "#{button_class} #{active_css(params[filter_criteria.keys.first].to_s, filter_criteria.values.first.to_s)}" 
   end
 
