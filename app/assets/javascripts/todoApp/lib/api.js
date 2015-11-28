@@ -13,6 +13,23 @@
         $(document).trigger('flash:success', ['Todo updated with title: ' + data.title]);
       };
     },
+    updateDoneCss: function(todoId) {
+      return function(data) {
+        var el = _cfg.doneButtonClass + '#' + todoId;
+        $(_cfg.todoTitleIdPrefix + todoId).toggleClass('done');
+        $(_cfg.todoDeadlineIdPrefix + todoId).toggleClass('done');
+        $(el).data(_cfg.doneDataAttr, data.done);
+        if(data.done) {
+          $(el).removeClass('btn-info');
+          $(el).addClass('btn-default');
+          $(el).html('Undo');
+        } else {
+          $(el).removeClass('btn-default');
+          $(el).addClass('btn-info');
+          $(el).html('Done');
+        }
+      };
+    },
 
     addTodoListRow: function(data) {
       $(_cfg.todosListClass).prepend(data.html);
@@ -43,17 +60,24 @@
   var api = {
 
     _post: function(url, formData, successHandler, errorHandler) {
-      console.log('formData', formData);
       $.post(url, formData)
         .done(function(data) {
           successHandler(data);
         })
         .fail(function(error) {
-          //console.log('error', error);
-          //$(document).trigger('flash:error', [error]);
-          //$(document).trigger('validation:form:error', [error]);
           errorHandler(error);
         })
+    },
+
+    updateDoneStatus: function(doneStatus, url, todoId) {
+      var formData = {
+        _method: 'patch',
+        todo: {
+          done: !doneStatus
+        }
+      };
+
+      this._post(url, formData, responseHandlers.updateDoneCss(todoId), responseHandlers.updateErrorHandler(todoId));
     },
 
     updateTodo: function(todoId) {

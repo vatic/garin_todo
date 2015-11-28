@@ -12,7 +12,7 @@ class Todo < ActiveRecord::Base
 
   validates :title, presence: true
   validates :deadline_at, presence: true
-  validate :deadline_is_greater_then_now?
+  validate :deadline_is_greater_then_now?, on: :create
 
   def deadline_is_greater_then_now?
     if deadline_at < Time.now

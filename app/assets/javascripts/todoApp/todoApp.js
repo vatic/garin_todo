@@ -17,6 +17,13 @@ var main = function() {
     $(_cfg.todoFormNewId).show();
   };
 
+  var _toggleTodoDone = function(e) {
+    var url = $(e.target).data(_cfg.urlDataAttr);
+    var done = $(e.target).data(_cfg.doneDataAttr);
+    _api.updateDoneStatus(done, url, _todoId(e));
+  };
+
+
   var _deleteTodo = function(e) {
     var url = $(e.target).data(_cfg.urlDataAttr);
     _api.deleteTodo(url, _todoId(e));
@@ -80,6 +87,11 @@ var main = function() {
 
   var actions = [
 
+    {
+      action: 'click',
+      selector: _cfg.doneButtonClass,
+      handler: _toggleTodoDone
+    },
     {
       action: 'click',
       selector: _cfg.editButtonClass,
