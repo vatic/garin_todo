@@ -18,9 +18,9 @@
         <% end %>
 
         <li>
-          <form class="navbar-form navbar-left" role="search">
+          <form class="navbar-form navbar-left" role="search" action=<%= user_todos_path(current_user) %>>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search Todos">
+              <input type="text" class="form-control" placeholder="Search Todos" name="search" value=<%= params[:search] %>>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
           </form>

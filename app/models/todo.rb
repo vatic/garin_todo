@@ -1,7 +1,7 @@
 class Todo < ActiveRecord::Base
   belongs_to :user
 
-  update_index('todos#todo') { self }
+  update_index('todos') { self }
 
   default_scope { order('updated_at DESC') }
 
@@ -13,6 +13,14 @@ class Todo < ActiveRecord::Base
     if deadline_at < Time.now
       errors.add(:deadline_at, 'Deadline must be in the future!')
     end
+  end
+
+  class << self
+
+    def search(search_string)
+      Todo.where("title ILIKE '%#{search_string}%'")
+    end
+
   end
 
 end

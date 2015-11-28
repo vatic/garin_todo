@@ -1,13 +1,25 @@
 class TodosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_todo, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:show, :edit, :update, :create, :destroy]
+  before_action :set_todo, only: [:update, :destroy]
+  before_action :set_user, only: [:update, :create, :destroy]
 
   respond_to :json
 
 
   def index
-    @todos = Todo.all
+
+    search_string = params[:search]
+
+    if search_string.empty?
+      @todos = Todo.all
+    else
+      if search_string =~ /\*/
+        @todos = TodosIndex.query( wildcard: {title: search_string } ).load
+      else
+        @todos = TodosIndex.query(query_string: {query: search_string } ).load
+      end
+    end
+
   end
 
 
