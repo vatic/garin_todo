@@ -8,17 +8,7 @@ class TodosController < ApplicationController
 
   def index
 
-    search_string = params[:search]
-
-    if search_string.empty?
-      @todos = Todo.all
-    else
-      if search_string =~ /\*/
-        @todos = TodosIndex.query( wildcard: {title: search_string } ).load
-      else
-        @todos = TodosIndex.query(query_string: {query: search_string } ).load
-      end
-    end
+    @todos = Todo.search(params[:search]).page params[:page]
 
   end
 

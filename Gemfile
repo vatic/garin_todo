@@ -83,3 +83,4 @@ gem 'chewy'
 
 gem 'activeadmin', github: 'activeadmin'
 
+gem 'kaminari'
