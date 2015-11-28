@@ -7,6 +7,9 @@ class Todo < ActiveRecord::Base
 
   default_scope { order('updated_at DESC') }
 
+  scope :done, -> { where(done: true) }
+  scope :in_progress, -> { where(done: false) }
+
   validates :title, presence: true
   validates :deadline_at, presence: true
   validate :deadline_is_greater_then_now?
@@ -16,6 +19,11 @@ class Todo < ActiveRecord::Base
       errors.add(:deadline_at, 'Deadline must be in the future!')
     end
   end
+
+  def make_done
+    update(done: true)
+  end
+
 
   class << self
 

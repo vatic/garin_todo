@@ -1,9 +1,10 @@
+<% done_css_class = (todo.done? ? "done":"") %>
 <div class="row" id=<%= "todo_row_#{todo.id}" %>>
   <div class="row">
-    <div class="col-xs-4" id=<%= "todo_title_#{todo.id}" %> >
+    <div class="col-xs-4 <%= done_css_class %>" id=<%= "todo_title_#{todo.id}" %> >
       <%= todo.title %>
     </div>
-    <div class="col-xs-4" id=<%= "todo_deadline_at_#{todo.id}" %>>
+    <div class="col-xs-4 <%= done_css_class %>" id=<%= "todo_deadline_at_#{todo.id}" %>>
       <%= todo.deadline_at %>
     </div>
     <div class="col-xs-4">

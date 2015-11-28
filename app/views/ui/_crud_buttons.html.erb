@@ -1,4 +1,9 @@
 <div class="btn-group">
+  <% unless todo.done? %>
+    <button class="btn btn-info todo-done-button" data-todo_id=<%= todo.id %>  >Done</button>
+  <% else %>
+    &nbsp;
+  <% end %>
   <button class="btn btn-warning todo-edit-button" data-todo_id=<%= todo.id %>  >Edit</button>
   <button class="btn btn-danger todo-delete-button" data-todo_id=<%= todo.id %> data-url=<%= user_todo_path(user,todo) %> >Delete</button>
 </div>
