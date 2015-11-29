@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
-  devise_for :users
+  devise_for :users, path: '_u'
   root 'todos#index'
 
   resources :users do
