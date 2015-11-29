@@ -1,5 +1,7 @@
 class TodosController < ApplicationController
   before_action :authenticate_user!
+  #before_action :auth
+
   before_action :set_todo, only: [:update, :destroy]
   before_action :set_user, only: [:update, :create, :destroy]
 
@@ -7,6 +9,7 @@ class TodosController < ApplicationController
 
 
   def index
+
 
     @todos = Todo.search(params[:search], params[:done]).page params[:page]
 
@@ -38,6 +41,7 @@ class TodosController < ApplicationController
 
 
   private
+
 
     def set_todo
       @todo = Todo.find(params[:id])

@@ -7,12 +7,16 @@ class User < ActiveRecord::Base
   has_many :todos
   accepts_nested_attributes_for :todos
 
+  def role
+    admin? ? 'admin':'user'
+  end
+
   def self.admin
-    User.find_by(admin: true)
+    User.where(admin: true)
   end
 
   def self.not_admin
-    User.find_by(admin: false)
+    User.where(admin: false)
   end
 
 end
