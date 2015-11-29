@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   before_action :authenticate_user!
-  #before_action :auth
+  before_action :auth
 
   before_action :set_todo, only: [:update, :destroy]
   before_action :set_user, only: [:update, :create, :destroy]
